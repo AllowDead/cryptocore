@@ -1,0 +1,203 @@
+# ============================================
+# Python specific ignores
+# ============================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# C extensions
+*.pyd
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.pyre/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# ============================================
+# Virtual Environments
+# ============================================
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# ============================================
+# IDE and Editor files
+# ============================================
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# ============================================
+# Operating System files
+# ============================================
+
+# macOS
+.DS_Store
+.DS_Store?
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============================================
+# Project-specific ignores
+# ============================================
+
+# Test data and temporary files
+test.txt
+*.test
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.save
+*.old
+
+# Logs
+*.log
+logs/
+
+# ============================================
+# Crypto-specific ignores (optional)
+# ============================================
+
+# Private keys and sensitive data
+*.key
+*.pem
+*.crt
+*.cert
+*.p12
+*.pfx
+*.jks
+secret*
+private*
+*.env
+.env*
+secrets.yaml
+secrets.yml
+
+# ============================================
+# Build and distribution
+# ============================================
+
+# Cython debug symbols
+*.dSYM/
+*.dSYM.zip
+
+# PyBuilder
+target/
+
+# Sphinx documentation
+docs/_build/
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# ============================================
+# Project root specific
+# ============================================
+
+# Root level cache directories
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# Coverage reports
+coverage.xml
+htmlcov/
+
+# Package metadata
+cryptocore.egg-info/
