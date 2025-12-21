@@ -1,6 +1,6 @@
 # CryptoCore - Криптографический провайдер
 
-Инструмент командной строки, реализующая шифрование AES-128 в режиме ECB, CBC, CRF, CTR, OFB с дополнением PKCS#7 и хеширование.
+Инструмент командной строки, реализующая шифрование AES-128 в режиме ECB, CBC, CRF, CTR, OFB с дополнением PKCS#7 хеширование.
 
 ## Требования
 
@@ -34,7 +34,7 @@
 
 ## Инструкция по сборке
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/AllowDead/CryptoCore>
 cd cryptocore
 
 # Установка зависимостей 
@@ -48,24 +48,24 @@ pip install -e .
 Базовый синтаксис
 ```bash
 cryptocore -h, --help
-cryptocore --algorithm aes --mode ecb (--encrypt | --decrypt) --key <hex_key> --input <input_file> [--output <output_file>]
+cryptocore encrypt --algorithm aes --mode ecb (--encrypt | --decrypt) --key <hex_key> --input <input_file> [--output <output_file>]
 Encryption Example
 bash
 # Encrypt a file
-cryptocore --algorithm aes --mode ecb --encrypt \
+cryptocore encrypt --algorithm aes --mode ecb --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input plaintext.txt \
   --output ciphertext.bin
 
 # Or with auto-generated output filename
-cryptocore --algorithm aes --mode ecb --encrypt \
+cryptocore encrypt --algorithm aes --mode ecb --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input secret.txt
 # Creates: secret.txt.enc
 Decryption Example
 bash
 # Decrypt a file
-cryptocore --algorithm aes --mode ecb --decrypt \
+cryptocore encrypt --algorithm aes --mode ecb --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --input ciphertext.bin \
   --output decrypted.txt
@@ -76,29 +76,29 @@ IV Handling
 
 CBC mode
 # Encryption (IV auto-generated)
-cryptocore --algorithm aes --mode cbc --encrypt \
+cryptocore encrypt --algorithm aes --mode cbc --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input plain.txt --output cipher.bin
 
 # Decryption (IV read from file)
-cryptocore --algorithm aes --mode cbc --decrypt \
+cryptocore encrypt --algorithm aes --mode cbc --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --input cipher.bin --output decrypted.txt
 
 # Decryption with explicit IV
-cryptocore --algorithm aes --mode cbc --decrypt \
+cryptocore encrypt --algorithm aes --mode cbc --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --iv aabbccddeeff00112233445566778899 \
   --input ciphertext_only.bin --output decrypted.txt
   
 Stream Modes (CFB, OFB, CTR)
 # CFB Encryption
-cryptocore --algorithm aes --mode cfb --encrypt \
+cryptocore encrypt --algorithm aes --mode cfb --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input plain.txt --output cipher.bin
 
 # CFB Decryption
-cryptocore --algorithm aes --mode cfb --decrypt \
+cryptocore encrypt --algorithm aes --mode cfb --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --input cipher.bin --output decrypted.txt
   
@@ -128,21 +128,21 @@ cryptocore dgst --algorithm sha256 --hmac --key 00112233445566778899aabbccddeeff
 
 # GCM Encryption
 # Encryption with AAD
-cryptocore --algorithm aes --mode gcm --encrypt \
+cryptocore encrypt --algorithm aes --mode gcm --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input plaintext.txt \
   --output ciphertext.gcm \
   --aad aabbccddeeff00112233445566778899
   
 # Decryption (AAD must match)
-cryptocore --algorithm aes --mode gcm --decrypt \
+cryptocore encrypt --algorithm aes --mode gcm --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --input ciphertext.gcm \
   --output decrypted.txt \
   --aad aabbccddeeff00112233445566778899
   
 # Encryption with separate keys
-cryptocore --mode etm --encrypt \
+cryptocore encrypt --mode etm --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --mac-key 33445566778899aabbccddeeff00112233445566778899aabbcc \
   --input data.txt \
@@ -150,7 +150,7 @@ cryptocore --mode etm --encrypt \
   --aad "context information"
 
 # Decryption and verification
-cryptocore --mode etm --decrypt \
+cryptocore encrypt --mode etm --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --mac-key 33445566778899aabbccddeeff00112233445566778899aabbcc \
   --input data.etm \
@@ -172,13 +172,13 @@ cryptocore derive --password-file password.txt --iterations 100000 --length 32
 ```
 ## Тест
 ```bash
-cryptocore --algorithm aes --mode ecb --encrypt \
+cryptocore encrypt --algorithm aes --mode ecb --encrypt \
   --key 00112233445566778899aabbccddeeff \
   --input test.txt \
   --output test.enc
 Success: Encrypted data written to test.enc
 
-cryptocore --algorithm aes --mode ecb --decrypt \
+cryptocore encrypt --algorithm aes --mode ecb --decrypt \
   --key 00112233445566778899aabbccddeeff \
   --input test.enc \
   --output test.dec
@@ -190,7 +190,7 @@ diff test.txt test.dec
 ## Совместимость с OpenSSl
 ```bash
 # Encrypt with CryptoCore
-cryptocore --algorithm aes --mode cbc --encrypt \
+cryptocore encrypt --algorithm aes --mode cbc --encrypt \
   --key 000102030405060708090a0b0c0d0e0f \
   --input plain.txt --output cipher.bin
 
@@ -211,7 +211,7 @@ openssl enc -aes-128-cbc \
   -in plain.txt -out openssl_cipher.bin
 
 # Decrypt with CryptoCore
-cryptocore --algorithm aes --mode cbc --decrypt \
+cryptocore encrypt --algorithm aes --mode cbc --decrypt \
   --key 000102030405060708090a0b0c0d0e0f \
   --iv aabbccddeeff00112233445566778899 \
   --input openssl_cipher.bin --output decrypted.txt
