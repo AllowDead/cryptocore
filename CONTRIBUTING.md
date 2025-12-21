@@ -37,28 +37,28 @@ pip install -e .
 ```
 
 ## Создание ветки для разработки
-# Получение последних изменений из upstream
+## Получение последних изменений из upstream
 git fetch upstream
 git checkout main
 git merge upstream/main
 
-# Создание новой ветки
+## Создание новой ветки
 git checkout -b тип/краткое-описание
-# Например:
-# git checkout -b feat/new-mode
-# git checkout -b fix/handle-large-files
-# git checkout -b docs/update-api
+ Например:
+ git checkout -b feat/new-mode
+ git checkout -b fix/handle-large-files
+ git checkout -b docs/update-api
 
 ## Процесс разработки
-# 1. Планирование изменений
+## 1. Планирование изменений
 Перед началом работы:
 Проверьте существующие issues - возможно, ваша идея уже обсуждается
 Создайте новый issue для обсуждения предлагаемых изменений
 Получите обратную связь от сообщества и мейнтейнеров
 Согласуйте дизайн для больших изменений
 
-# 2. Разработка кода
-# Регулярно синхронизируйтесь с основной веткой
+## 2. Разработка кода
+## Регулярно синхронизируйтесь с основной веткой
 ```bash
 git fetch upstream
 git merge upstream/main
@@ -76,18 +76,18 @@ git commit -m "тип: краткое описание"
 ```
 ## Криптографические соглашения
 Именование переменных
-#  ПРАВИЛЬНО
+##  ПРАВИЛЬНО
 encryption_key = b'\x00' * 16
 initialization_vector = os.urandom(16)
 authentication_tag = compute_tag(data)
 
-#  НЕПРАВИЛЬНО
+##  НЕПРАВИЛЬНО
 key = b'\x00' * 16  # без контекста
 iv = os.urandom(16)  # сокращение без пояснения
 tag = compute_tag(data)  # без контекста
 
-# Безопасность по умолчанию
-#  ПРАВИЛЬНО: постоянные по времени операции
+## Безопасность по умолчанию
+##  ПРАВИЛЬНО: постоянные по времени операции
 def constant_time_compare(a: bytes, b: bytes) -> bool:
     """Сравнение, постоянное по времени."""
     if len(a) != len(b):
@@ -97,27 +97,27 @@ def constant_time_compare(a: bytes, b: bytes) -> bool:
         result |= x ^ y
     return result == 0
 
-#  НЕПРАВИЛЬНО: уязвимость по времени
+##  НЕПРАВИЛЬНО: уязвимость по времени
 def unsafe_compare(a: bytes, b: bytes) -> bool:
     return a == b  # Прерывается при первом несовпадении
 
 ## Тестирование
-# Запуск всех тестов
+## Запуск всех тестов
 python tests/run_tests.py
 
-# Только модульные тесты
+## Только модульные тесты
 python tests/run_tests.py --unit
 
-# Только интеграционные тесты
+## Только интеграционные тесты
 python tests/run_tests.py --integration
 
-# Конкретный тестовый файл
+## Конкретный тестовый файл
 python -m pytest tests/unit/test_aes.py -v
 
-# С измерением покрытия кода
+## С измерением покрытия кода
 python tests/run_tests.py --coverage
 
-# Быстрые тесты (пропуск медленных)
+## Быстрые тесты (пропуск медленных)
 python -m pytest tests/ -m "not slow"
 
 ## Документация
@@ -128,20 +128,20 @@ API документация
 ## Создание пул-реквестов
 ## 1. Подготовка пул-реквеста
 
-# Убедитесь, что ваша ветка актуальна
+## Убедитесь, что ваша ветка актуальна
 git fetch upstream
 git merge upstream/main
 
-# Запустите тесты
+## Запустите тесты
 python tests/run_tests.py
 
-# Проверьте стиль кода
+## Проверьте стиль кода
 python -m pycodestyle cryptocore/ tests/ --max-line-length=88
 
-# Создайте коммит с хорошим сообщением
+## Создайте коммит с хорошим сообщением
 git commit -m "feat: добавлен режим шифрования XTS"
 
-# Отправьте ветку в ваш форк
+## Отправьте ветку в ваш форк
 git push origin feat/xts-mode
 
 ## 3. Процесс ревью
