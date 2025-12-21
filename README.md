@@ -216,3 +216,69 @@ cryptocore encrypt --algorithm aes --mode cbc --decrypt \
   --iv aabbccddeeff00112233445566778899 \
   --input openssl_cipher.bin --output decrypted.txt
 ```
+## Структура проекта
+
+cryptocore/
+├── cryptocore/                    # Основной пакет Python
+│   ├── __init__.py               # Инициализация пакета
+│   ├── cli_parser.py             # Парсер командной строки 
+│   ├── file_io.py                # Работа с файлами (чтение/запись)
+│   ├── csprng.py                 # CSPRNG модуль (Sprint 3)
+│   ├── hash_handler.py           # Обработчик хэш-команд (Sprint 4, Sprint 5)
+│   ├── aead_handler.py           # Обработчик аутентифицированного шифрования (Sprint 6)
+│   │                  
+│   ├── modes/                    # Реализации режимов шифрования
+│   │   ├── __init__.py
+│   │   ├── ecb.py                # ECB mode (Sprint 1)
+│   │   ├── cbc.py                # CBC mode (Sprint 2)
+│   │   ├── cfb.py                # CFB mode (Sprint 2)
+│   │   ├── ofb.py                # OFB mode (Sprint 2)
+│   │   ├── ctr.py                # CTR mode (Sprint 2)
+│   │   └── gcm.py                # GCM mode (Sprint 6)
+│   ├── hash/                     # Реализации хэш-функций (Sprint 4)
+│   │   ├── __init__.py
+│   │   ├── sha256.py             # SHA-256  (FIPS 180-4)
+│   │   └── sha3_256.py           # SHA3-256  (FIPS 202)
+│   ├── mac/                      # Реализации MAC (Sprint 5)
+│   │   ├── __init__.py
+│   │   └── hmac.py               # HMAC  (RFC 2104)
+│   └── kdf/                      # Реализации функций KDF (Sprint 7)
+│       ├── __init__.py
+│       ├── hkdf.py               # HKDF (RFC 5869)
+│       └── pbkdf2.py             # PBKDF2  (RFC 8018)
+│       └── pbkdf2.py             # PBKDF2  (RFC 8018)
+│
+├── docs/
+│   ├── API.md
+│   └── USERGUIDE.md 
+│
+│
+├── tests/                        # Тесты
+│   ├── __init__.py
+│   ├── test_ecb.py              # Тесты ECB mode (Sprint 1)
+│   ├── test_modes.py            # Тесты других режимов (Sprint 2)
+│   ├── test_csprng.py           # Тесты CSPRNG (Sprint 3)
+│   ├── test_hash.py             # Тесты хэш-функций (Sprint 4)
+│   ├── test_hmac.py             # Тесты HMAC (Sprint 5)
+│   ├── test_gcm.py              # Тесты GCM (Sprint 6)
+│   ├── test_kdf.py              # Тесты KDF функций (Sprint 7)
+│   ├── test_kdf_performance.py  # Тесты производительности KDF
+│   ├── test_large_files.py      # Тесты больших файлов >1GB (Sprint 4)
+│   ├── test_large_file_hmac.py  # Тесты HMAC с большими файлами (Sprint 5)
+│   ├── test_large_gcm.py        # Тесты GCM с большими файлами (Sprint 6)
+│   ├── test_openssl_compatibility.py # Тесты совместимости с OpenSSL
+│   ├── test_security.py         # Тесты безопасности
+│   ├── test_file_io.py          # Тесты работы с файлами
+│   ├── test_all_functionality.py # Комплексные тесты всей функциональности
+│   ├── hmac_key_test.py         # Тесты ключей HMAC
+│   ├── vectors_sha256_hmac.py   # Тестовые векторы для SHA-256 HMAC
+│   ├── kdf_openssl_compatibility.py # Тесты совместимости KDF с OpenSSL
+│   └── nist_test_data.bin       # Тестовые данные для NIST STS (10 МБ)
+│
+├── CHANGELOG.md
+├── SECURITY.md
+├── CONTRIBUTING.md
+├── TESTING.md                   # Результаты тестирования
+├── setup.py                     # Установочный файл Python
+├── requirements.txt             # Зависимости проекта
+└── README.md       
