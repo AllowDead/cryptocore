@@ -1,8 +1,4 @@
-# tests/test_openssl_compatibility_fixed.py
-# !/usr/bin/env python3
-"""
-Fixed OpenSSL Compatibility Test Script
-"""
+#Запуск вручную
 
 import os
 import sys

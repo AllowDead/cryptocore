@@ -1,12 +1,11 @@
-# setup.py
 from setuptools import setup, find_packages
 
 setup(
     name="cryptocore",
     version="1.0.0",
     description="Minimalist Cryptographic Provider",
-    author="Your Name",
-    packages=find_packages(),  # Автоматически найдет все пакеты
+    author="AllowDead",
+    packages=find_packages(),
     install_requires=[
         "pycryptodome>=3.20.0",
         "pyopenssl>=3.2.1",

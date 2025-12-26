@@ -1,0 +1,57 @@
+{
+  "summary": {
+    "total_tests": 11,
+    "passed": 8,
+    "failed": 3,
+    "success_rate": 72.72727272727273
+  },
+  "detailed_results": {
+    "Sprint 1: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c ECB \u0440\u0435\u0436\u0438\u043c\u0430": {
+      "success": false,
+      "details": "CompletedProcess(args=['C:\\\\Users\\\\Fedor\\\\PycharmProjects\\\\cryptocore\\\\.venv\\\\Scripts\\\\python.exe', '-m', 'cryptocore.cli_parser', 'encrypt', '--algorithm', 'aes', '--mode', 'ecb', '--decrypt', '--key"
+    },
+    "Sprint 2: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c \u0440\u0435\u0436\u0438\u043c\u043e\u0432 \u0441 IV": {
+      "success": false,
+      "details": "CompletedProcess(args=['C:\\\\Users\\\\Fedor\\\\PycharmProjects\\\\cryptocore\\\\.venv\\\\Scripts\\\\python.exe', '-m', 'cryptocore.cli_parser', 'encrypt', '--algorithm', 'aes', '--mode', 'cbc', '--decrypt', '--key"
+    },
+    "Sprint 2: \u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c IV": {
+      "success": true,
+      "details": "CBC: \u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c IV \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0430"
+    },
+    "Sprint 3: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c CSPRNG": {
+      "success": true,
+      "details": "CSPRNG \u0442\u0435\u0441\u0442\u044b \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0439\u0434\u0435\u043d\u044b"
+    },
+    "Sprint 4: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c \u0445\u0435\u0448-\u0444\u0443\u043d\u043a\u0446\u0438\u0439": {
+      "success": true,
+      "details": "\u0425\u0435\u0448-\u0444\u0443\u043d\u043a\u0446\u0438\u0438 \u043f\u0440\u043e\u0448\u043b\u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438"
+    },
+    "Sprint 5: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c HMAC": {
+      "success": false,
+      "details": "CompletedProcess(args=['C:\\\\Users\\\\Fedor\\\\PycharmProjects\\\\cryptocore\\\\.venv\\\\Scripts\\\\python.exe', '-m', 'cryptocore.cli_parser', 'dgst', '--algorithm', 'sha256', '--hmac', '--key', 'ffeeddccbbaa9988"
+    },
+    "Sprint 6: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c GCM": {
+      "success": true,
+      "details": "GCM \u0442\u0435\u0441\u0442\u044b \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0439\u0434\u0435\u043d\u044b"
+    },
+    "Sprint 6: \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c Encrypt-then-MAC": {
+      "success": true,
+      "details": "ETM \u0442\u0435\u0441\u0442\u044b \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438 \u043f\u0440\u043e\u0439\u0434\u0435\u043d\u044b"
+    },
+    "\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f: \u0421\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u0440\u0435\u0436\u0438\u043c\u043e\u0432": {
+      "success": true,
+      "details": "\u0421\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u0440\u0435\u0436\u0438\u043c\u043e\u0432 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e"
+    },
+    "\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f: \u041e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u043e\u0448\u0438\u0431\u043e\u043a": {
+      "success": true,
+      "details": "\u0422\u0435\u0441\u0442\u044b \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u043e\u0448\u0438\u0431\u043e\u043a \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u044b"
+    },
+    "\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f: \u041f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c \u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c": {
+      "success": true,
+      "details": "\u0422\u0435\u0441\u0442\u044b \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u044b"
+    }
+  },
+  "timestamp": "2025-12-21 22:06:23",
+  "platform": "win32",
+  "python_version": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]"
+}

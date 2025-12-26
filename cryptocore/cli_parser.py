@@ -256,86 +256,51 @@ def parse_args():
 
 
 def check_weak_key(key_bytes):
-    """Check if key is weak (all zeros, sequential bytes, etc.)"""
+    """
+    Check if key is weak (all zeros, sequential bytes, repeating patterns, etc.).
+    Returns: (True, reason) if weak, (False, None) otherwise.
+    """
     if len(key_bytes) != 16:
         return False, None
 
-    # Check for all zeros
-    if all(b == 0 for b in key_bytes):
+    # 1. Check for all zeros
+    if key_bytes == b'\x00' * 16:
         return True, "Key contains all zero bytes"
 
-    # Check for all same byte
-    if all(b == key_bytes[0] for b in key_bytes):
+    # 2. Check for all same byte (например, 0xFFFFFFFF...)
+    # Это быстрее и надежнее цикла
+    if len(set(key_bytes)) == 1:
         return True, "Key contains all identical bytes"
 
-    # Check for sequential hex pairs: 00, 11, 22, 33, ..., ff
-    # Ключ: 00112233445566778899aabbccddeeff
-    # Это пары: 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
-
-    is_hex_pairs = True
-    for i in range(0, 32, 2):  # 16 байт = 32 hex символа
-        hex_pair = key_bytes.hex()[i:i + 2]  # берем пару hex символов
-
-        # Проверяем, что оба символа одинаковые
-        if hex_pair[0] != hex_pair[1]:
-            is_hex_pairs = False
-            break
-
-        # Проверяем последовательность: 00, 11, 22, ..., ff
-        expected_value = i // 2  # 0, 1, 2, ..., 15
-        if int(hex_pair, 16) != expected_value:
-            is_hex_pairs = False
-            break
-
-    if is_hex_pairs:
-        return True, "Key contains sequential repeating hex pairs (00, 11, 22, ..., ff)"
-
-    # Check for simple sequential bytes: 0x00, 0x01, 0x02, ...
-    is_sequential = True
-    for i in range(16):
-        if key_bytes[i] != i:
-            is_sequential = False
-            break
-
-    if is_sequential:
+    # 3. Check for simple sequential bytes (0x00, 0x01, 0x02, ...)
+    if key_bytes == bytes(range(16)):
         return True, "Key contains simple sequential bytes (0x00, 0x01, 0x02, ...)"
 
-    # Check for reverse sequential: 0xff, 0xfe, 0xfd, ...
-    is_reverse = True
-    for i in range(16):
-        if key_bytes[i] != (0xff - i):
-            is_reverse = False
-            break
-
-    if is_reverse:
+    # 4. Check for reverse sequential (0xff, 0xfe, ...)
+    if key_bytes == bytes(reversed(range(256)))[:16]:
         return True, "Key contains reverse sequential bytes (0xff, 0xfe, 0xfd, ...)"
 
-    # Check for low entropy (few unique bytes)
+    # 5. Check for low entropy (очень низкое разнообразие байт)
+    # Если в ключе меньше 4 уникальных байт - это явно мусор
     unique_bytes = len(set(key_bytes))
     if unique_bytes < 4:
-        return True, f"Key has very low entropy (only {unique_bytes} unique bytes)"
-    elif unique_bytes < 8:
-        return True, f"Key has low entropy (only {unique_bytes} unique bytes)"
+        return True, f"Key has suspiciously low entropy (only {unique_bytes} unique bytes)"
 
-    # Check for repeating patterns
+    # 6. Check for repeating patterns (ABABABAB...)
+    # Проверяем делители длины ключа: 1, 2, 4, 8
     for pattern_size in [1, 2, 4, 8]:
         if 16 % pattern_size == 0:
             pattern = key_bytes[:pattern_size]
-            repetitions = 16 // pattern_size
-
-            # Создаем ожидаемый ключ из повторяющегося паттерна
-            expected = pattern * repetitions
-
-            if key_bytes == expected:
+            # Умножаем паттерн, чтобы получить длину 16
+            if key_bytes == pattern * (16 // pattern_size):
                 return True, f"Key contains repeating {pattern_size}-byte pattern"
 
-    # Known weak keys
+    # 7. Known specific weak keys list
+    # Сюда добавлены те ключи, которые не поймались предыдущими проверками,
+    # но считаются известными "нелепыми" (например, hex-пары)
     weak_keys = [
-        bytes.fromhex("00000000000000000000000000000000"),
-        bytes.fromhex("ffffffffffffffffffffffffffffffff"),
-        bytes.fromhex("0123456789abcdef0123456789abcdef"),
-        bytes.fromhex("fedcba9876543210fedcba9876543210"),
-        bytes.fromhex("00112233445566778899aabbccddeeff"),
+        bytes.fromhex("00112233445566778899aabbccddeeff"),  # 00 11 22 ...
+        bytes.fromhex("0123456789abcdeffedcba9876543210"),  # Mix of sequences
     ]
 
     if key_bytes in weak_keys:
